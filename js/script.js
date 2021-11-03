@@ -5,6 +5,7 @@ const button = document.getElementById("mode_btn");
 let selectMode = document.getElementById("select_mode");
 let bombs = [];
 let bomb = [];
+let control = true;
 
 
 
@@ -13,16 +14,12 @@ button.addEventListener("click", function(){
 
 
     container.innerHTML = "";
+    control = true;
     let box = difficultySelect(selectMode);
-
 
     console.log('button', box);
 
-
-
     init(box);
-
-  
 
 })
 
@@ -33,42 +30,41 @@ function init(tot){
     bomb = genBomb(bombs);
     console.log('bombe', bomb); 
     
-    for(let i = 0; i < tot; i++){
+        for(let i = 0; i < tot; i++){
 
-        console.log('functionInit', tot);
+            console.log('functionInit', tot);
 
-        // creo l'elemento square e lo aggiungo al container
-        const sq = createSquare(container);
-        let plus = i + 1;
-        console.log('contatore', plus);
-        sq.innerHTML = plus;
-
-
-        let control = 1;
-        while (control == 0) {
-            
+            // creo l'elemento square e lo aggiungo al container
+            const sq = createSquare(container);
+            let plus = i + 1;
+            console.log('contatore', plus);
+            sq.innerHTML = plus;
+        
+                
 
             sq.addEventListener('click',function(){
 
-                //  console.log(this);
-                if (bomb.includes(plus)) {
-      
-                  this.classList.add('bombs');
-                  alert('HAI PERSO');
-                  control == 0;
-                  
+                    if (control == true) {
+                        
                     
-                }else
-                  this.classList.add('clicked');
-              }
-              
-              )
+                        if (bomb.includes(plus)) {
+            
+                        this.classList.add('bombs');
+                        alert('HAI PERSO');
+                        control = false;
+                
+                            
+                        }else{
 
-
-        }
+                            this.classList.add('clicked');
+                        }
+                        
+                
+                }
+            })
+            
         
-    
-    }
+        }
     
 }
 
